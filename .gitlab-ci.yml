@@ -1,0 +1,10 @@
+image: node:14
+
+stages:
+    - test
+
+test:
+    stage: test
+    script:
+        - curl https://get.datree.io | /bin/bash
+        - datree test ~/.datree/k8s-demo.yaml
