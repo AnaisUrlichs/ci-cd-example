@@ -1,0 +1,21 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/node
+    steps:
+      - checkout
+      - run: npm run build
+  test:
+    docker:
+      - image: circleci/node
+    steps:
+      - checkout
+      - run: curl https://get.datree.io | /bin/bash
+      - run: datree test ~/.datree/k8s-demo.yaml
+
+workflows:
+  main:
+    jobs:
+      - build
+      - test
